@@ -1,6 +1,7 @@
 const inquirer = require("inquirer");
 const fs = require("fs");
 const gen = require("./generateHTML.js");
+const axios = require("axios");
 
 const questions = [ 
     {
@@ -30,10 +31,21 @@ function writeToFile(fileName, data) {
 
 }
 
+function getGitHubData(data) {
+    axios
+    .get(`https://api.github.com/search/users?q=${data.username}`)
+
+    .then(function(res) {
+        console.log(res.data);
+    })
+}
+
 function init() {
     promptUser()
         .then(function(answers) {
             const html = gen.generateHTML(answers);
+            
+            getGitHubData(answers);
             writeToFile("hi.html", html)
             
         })
