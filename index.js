@@ -1,4 +1,7 @@
 const inquirer = require("inquirer");
+const fs = require("fs");
+const gen = require("./generateHTML.js");
+
 const questions = [ 
     {
       type: "input",
@@ -18,13 +21,21 @@ function promptUser() {
 }
 
 function writeToFile(fileName, data) {
- 
+    fs.writeFile(fileName, data, function(err) {
+        if (err) {
+            return console.log(err);
+        }
+        console.log("success");
+    });
+
 }
 
 function init() {
     promptUser()
         .then(function(answers) {
-            console.log(answers);
+            const html = gen.generateHTML(answers);
+            writeToFile("hi.html", html)
+            
         })
         .catch(function(err) {
             console.log(err);
