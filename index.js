@@ -31,16 +31,22 @@ function writeToFile(gitHubData) {
 
 function populateProfile(data) {
     user = {
-        name: data.items[0].login,
-        profileImage: data.items[0].avatar_url,
-        githubLink: data.items[0].html_url,
+        name: data.login,
+        profileImage: data.avatar_url,
+        githubLink: data.html_url,
+        location: data.location,
+        blog: data.blog,
+        bio: data.bio,
+        publicRepos: data.public_repos,
+        followers: data.followers,
+        following: data.following,
+//        githubStars: data
     }
     writeToFile(user);
 }
 
-
 function getGitHubData(response) {
-    const queryUrl = `https://api.github.com/search/users?q=${response.username}`;
+    const queryUrl = `https://api.github.com/users/${response.username}`;
     axios.get(queryUrl)
     .then(function(result) {
         populateProfile(result.data);
