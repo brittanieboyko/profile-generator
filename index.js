@@ -26,7 +26,6 @@ function promptUser() {
 
 function getGitHubData(response) {
     const queryUrl = `https://api.github.com/search/users?q=${response.username}`;
-    console.log(color);
     axios.get(queryUrl)
     .then(function(result) {
         console.log("hey this worked");
