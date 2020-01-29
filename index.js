@@ -4,7 +4,7 @@ const gen = require("./generateHTML.js");
 const axios = require("axios");
 const util = require("util");
 const writeFileAsync = util.promisify(fs.writeFile);
-
+let inquirerData = {};
 
 const questions = [ 
     {
@@ -24,11 +24,26 @@ function promptUser() {
     return inquirer.prompt(questions)
 }
 
+function writeToFile(gitHubData) {
+    const html = gen.generateHTML(inquirerData, gitHubData);
+    return writeFileAsync("okay.html", html);
+}
+
+function populateProfile(data) {
+    user = {
+        name: data.items[0].login,
+        profileImage: data.items[0].avatar_url,
+        githubLink: data.items[0].html_url,
+    }
+    writeToFile(user);
+}
+
+
 function getGitHubData(response) {
     const queryUrl = `https://api.github.com/search/users?q=${response.username}`;
     axios.get(queryUrl)
     .then(function(result) {
-        console.log("hey this worked");
+        populateProfile(result.data);
      })
      .catch(err => {
          throw(err);
@@ -39,9 +54,9 @@ function init() {
 
     promptUser()
     .then(function(answers) {
-        const html = gen.generateHTML(answers);
-        getGitHubData(answers)
-        return  writeFileAsync("okay.html", html);
+        inquirerData = answers;
+        getGitHubData(inquirerData)
+        
     })
     .catch(err => {
         throw(err);

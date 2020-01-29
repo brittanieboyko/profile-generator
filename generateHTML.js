@@ -25,7 +25,7 @@ const colors = {
     }
   };
   
-  const generateHTML = function(data) {
+  const generateHTML = function(data, userData) {
     return `<!DOCTYPE html>
         <html lang="en">
           <head>
@@ -71,6 +71,7 @@ const colors = {
                 }
                 h1 {
                 font-size: 3em;
+                margin: 0 auto;
                 }
                 h2 {
                 font-size: 2.5em;
@@ -97,7 +98,7 @@ const colors = {
                 background-color: ${colors[data.color].headerBackground};
                 color: ${colors[data.color].headerColor};
                 padding: 10px;
-                width: 95%;
+                width: 35%;
                 border-radius: 6px;
                 }
                 .photo-header img {
@@ -172,7 +173,12 @@ const colors = {
                 }
               </style>
               <body>
-              <h1> Hi my name is ${data.username}</h1>
+              <div class="wrapper container">
+                <img src="${userData.profileImage}" alt="Profile Image" class="photo-header row">
+                <h1> Hi, I'm ${data.username}</h1>
+              </div>
+              <div class="card col"></div>
+              <div class="card col"></div>
               </body>
           </html>`
   }
