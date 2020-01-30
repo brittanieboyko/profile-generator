@@ -75,6 +75,7 @@ const colors = {
                 }
                 h2 {
                 font-size: 2.5em;
+                text-align: center;
                 }
                 h3 {
                 font-size: 2em;
@@ -98,7 +99,7 @@ const colors = {
                 background-color: ${colors[data.color].headerBackground};
                 color: ${colors[data.color].headerColor};
                 padding: 10px;
-                width: 35%;
+                width: 95%;
                 border-radius: 6px;
                 }
                 .photo-header img {
@@ -173,12 +174,40 @@ const colors = {
                 }
               </style>
               <body>
-              <div class="wrapper container">
-                <img src="${userData.profileImage}" alt="Profile Image" class="photo-header row">
-                <h1> Hi, I'm ${data.username}</h1>
-              </div>
-              <div class="card col"></div>
-              <div class="card col"></div>
+                <div class="wrapper">
+                  <div class="photo-header">
+                    <img src="${userData.profileImage}" alt="Profile Image">
+                    <h1> Hi, I'm ${data.username}</h1>
+                    <div class="container">
+                      <a href="${userData.githubLink}" class="nav-link"> <i class="fab fa-github"></i> GitHub</a>
+                      <a href="" class="nav-link"><i class="fas fa-location-arrow"></i> ${userData.location}</a>
+                      <a href="${userData.blog}" class="nav-link"><i class="fas fa-rss"></i> Blog</a>
+                    </div>
+                  </div>
+                  <main class="container">
+                    <h2>${userData.bio}</h2>
+                    <div class="row">
+                      <div class="card col">
+                        <h3>Public Repos</h3>
+                        <h4>${userData.publicRepos}</h4>
+                      </div>
+                      <div class="card col">
+                        <h3>Followers</h3>
+                        <h4>${userData.followers}</h4>
+                      </div>
+                    </div>
+                    <div class="row">
+                      <div class="card col">
+                        <h3>Following</h3>
+                        <h4>${userData.following}</h4>
+                      </div>
+                      <div class="card col">
+                        <h3>Stars</h3>
+                        <h4>0</h4>
+                      </div>
+                    </div>
+                  </main>
+                </div>
               </body>
           </html>`
   }
