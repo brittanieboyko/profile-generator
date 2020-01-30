@@ -30,6 +30,7 @@ function writeToFile(gitHubData) {
 }
 
 function populateProfile(data) {
+    const starArray =  data.starred_url.split(",")
     user = {
         name: data.login,
         profileImage: data.avatar_url,
@@ -40,7 +41,7 @@ function populateProfile(data) {
         publicRepos: data.public_repos,
         followers: data.followers,
         following: data.following,
-//        githubStars: data
+        stars: starArray.length
     }
     writeToFile(user);
 }

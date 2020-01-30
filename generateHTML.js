@@ -203,7 +203,7 @@ const colors = {
                       </div>
                       <div class="card col">
                         <h3>Stars</h3>
-                        <h4>0</h4>
+                        <h4>${userData.stars}</h4>
                       </div>
                     </div>
                   </main>
