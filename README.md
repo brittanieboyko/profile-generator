@@ -9,7 +9,7 @@ Developer Profile Generator
 
 ## Built with:
 * CSS, HTML, Javascript, Node.js
-* [Google Maps API](https://cloud.google.com/maps-platform/maps/)
+* [Google Maps](https://cloud.google.com/maps-platform/maps/)
 * [GitHub API](https://developer.github.com/v3/)
 * [Inquirer](https://www.npmjs.com/package/inquirer/)
 * [electron-html-to](https://www.npmjs.com/package/electron-html-to/)
