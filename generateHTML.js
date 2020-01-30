@@ -180,7 +180,7 @@ const colors = {
                     <h1> Hi, I'm ${data.username}</h1>
                     <div class="container">
                       <a href="${userData.githubLink}" class="nav-link"> <i class="fab fa-github"></i> GitHub</a>
-                      <a href="" class="nav-link"><i class="fas fa-location-arrow"></i> ${userData.location}</a>
+                      <a href="${userData.locationLink}" class="nav-link"><i class="fas fa-location-arrow"></i> ${userData.location}</a>
                       <a href="${userData.blog}" class="nav-link"><i class="fas fa-rss"></i> Blog</a>
                     </div>
                   </div>

@@ -30,12 +30,14 @@ function writeToFile(gitHubData) {
 }
 
 function populateProfile(data) {
-    const starArray =  data.starred_url.split(",")
+    const starArray =  data.starred_url.split(",");
+    const location = data.location;
     user = {
         name: data.login,
         profileImage: data.avatar_url,
         githubLink: data.html_url,
-        location: data.location,
+        location: location,
+        locationLink: `https://www.google.com/maps?q=${location}`,
         blog: data.blog,
         bio: data.bio,
         publicRepos: data.public_repos,
