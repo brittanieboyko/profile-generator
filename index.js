@@ -4,48 +4,45 @@ const gen = require("./generateHTML.js");
 const axios = require("axios");
 const convertFactory = require('electron-html-to');
 
-
 let conversion = convertFactory({
     converterPath: convertFactory.converters.PDF
-  });
+});
 
 let inquirerData = {};
 
-const questions = [ 
-    {
-      type: "input",
-      name: "username",
-      message: "What is your GitHub username?"
+const questions = [{
+        type: "input",
+        name: "username",
+        message: "What is your GitHub username?"
     },
     {
-      type: "list",
-      name: "color",
-      message: "What's your favorite color?",
-      choices: ["blue","green","red","pink"]
+        type: "list",
+        name: "color",
+        message: "What's your favorite color?",
+        choices: ["blue", "green", "red", "pink"]
     }
 ];
 
 function promptUser() {
-    return inquirer.prompt(questions)
+    return inquirer.prompt(questions);
 }
 
 function writeToFile(gitHubData) {
     const html = gen.generateHTML(inquirerData, gitHubData);
 
-    conversion({ html: html }, function(err, result) {
+    conversion({
+        html: html
+    }, function(err, result) {
         if (err) {
             return console.error(err);
         }
         result.stream.pipe(fs.createWriteStream('./resume.pdf'));
-        conversion.kill(); 
-        });
+        conversion.kill();
+    });
 }
 
- 
-
-
 function populateProfile(data) {
-    const starArray =  data.starred_url.split(",");
+    const starArray = data.starred_url.split(",");
     const location = data.location;
     user = {
         name: data.login,
@@ -66,25 +63,23 @@ function populateProfile(data) {
 function getGitHubData(response) {
     const queryUrl = `https://api.github.com/users/${response.username}`;
     axios.get(queryUrl)
-    .then(function(result) {
-        populateProfile(result.data);
-     })
-     .catch(err => {
-         throw(err);
-     })
+        .then(result => {
+            populateProfile(result.data);
+        })
+        .catch(err => {
+            throw (err);
+        })
 }
 
 function init() {
-
     promptUser()
-    .then(function(answers) {
-        inquirerData = answers;
-        getGitHubData(inquirerData)
-        
-    })
-    .catch(err => {
-        throw(err);
-    });
+        .then(answers => {
+            inquirerData = answers;
+            getGitHubData(inquirerData)
+        })
+        .catch(err => {
+            throw (err);
+        });
 }
 
 init();
