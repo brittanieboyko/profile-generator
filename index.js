@@ -2,8 +2,13 @@ const inquirer = require("inquirer");
 const fs = require("fs");
 const gen = require("./generateHTML.js");
 const axios = require("axios");
-const util = require("util");
-const writeFileAsync = util.promisify(fs.writeFile);
+const convertFactory = require('electron-html-to');
+
+
+let conversion = convertFactory({
+    converterPath: convertFactory.converters.PDF
+  });
+
 let inquirerData = {};
 
 const questions = [ 
@@ -26,8 +31,18 @@ function promptUser() {
 
 function writeToFile(gitHubData) {
     const html = gen.generateHTML(inquirerData, gitHubData);
-    return writeFileAsync("profile.html", html);
+
+    conversion({ html: html }, function(err, result) {
+        if (err) {
+            return console.error(err);
+        }
+        result.stream.pipe(fs.createWriteStream('./resume.pdf'));
+        conversion.kill(); 
+        });
 }
+
+ 
+
 
 function populateProfile(data) {
     const starArray =  data.starred_url.split(",");
