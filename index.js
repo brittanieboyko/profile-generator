@@ -26,7 +26,7 @@ function promptUser() {
 
 function writeToFile(gitHubData) {
     const html = gen.generateHTML(inquirerData, gitHubData);
-    return writeFileAsync("okay.html", html);
+    return writeFileAsync("profile.html", html);
 }
 
 function populateProfile(data) {
