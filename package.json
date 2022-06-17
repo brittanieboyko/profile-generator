@@ -19,6 +19,6 @@
   "dependencies": {
     "inquirer": "^7.0.4",
     "axios": "^0.19.2",
-    "electron": "^7.2.4"
+    "electron": "^15.5.5"
   }
 }
